@@ -14,7 +14,7 @@ build = "build.rs"
 edition = "2018"
 
 [dependencies]
-mmal-sys = "0.1.0-3"
+mmal-sys = { git = "https://github.com/Bluskript/mmal-sys" }
 libc = "0.2"
 parking_lot = "0.10"
 scopeguard = "1.0"

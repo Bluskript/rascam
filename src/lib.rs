@@ -709,8 +709,9 @@ impl SeriousCamera {
             // https://github.com/waveform80/picamera/issues/22
             // and the commit message that closed issue #22
             let mut preview_ptr = MaybeUninit::uninit();
+            let name: &[i8; ffi::MMAL_COMPONENT_NULL_SINK.len()] = std::mem::transmute(ffi::MMAL_COMPONENT_NULL_SINK);
             let status = ffi::mmal_component_create(
-                ffi::MMAL_COMPONENT_NULL_SINK.as_ptr(),
+                name.as_ptr(),
                 preview_ptr.as_mut_ptr(),
             );
 

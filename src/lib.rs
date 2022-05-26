@@ -55,13 +55,6 @@ pub use ffi::MMAL_ENCODING_RGB24;
 
 pub use ffi::MMAL_ENCODING_H264;
 
-// TODO: do something about these:
-pub use ffi::MMAL_VIDEO_LEVEL_H264_4;
-pub use ffi::MMAL_VIDEO_LEVEL_H264_41;
-pub use ffi::MMAL_VIDEO_LEVEL_H264_42;
-pub use ffi::MMAL_VIDEO_PROFILE_H264_BASELINE;
-pub use ffi::MMAL_VIDEO_PROFILE_H264_HIGH;
-
 struct Userdata {
     pool: NonNull<ffi::MMAL_POOL_T>,
     _guard: Arc<Mutex<()>>,

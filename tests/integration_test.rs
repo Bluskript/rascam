@@ -22,8 +22,8 @@ mod integration {
             use_encoder: true,
             // video
             framerate: 10,
-            video_profile: rascam::MMAL_VIDEO_PROFILE_H264_HIGH,
-            video_level: rascam::MMAL_VIDEO_LEVEL_H264_4,
+            video_profile: rascam::MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH,
+            video_level: rascam::MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_4,
             ..Default::default()
         };
 

@@ -1,3 +1,6 @@
+use mmal_sys::{
+    MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_4, MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH,
+};
 use rascam::*;
 use std::fs::File;
 use std::io::{BufWriter, Write};
@@ -25,8 +28,8 @@ fn simple_video(info: &CameraInfo) {
         use_encoder: true,
         // video
         framerate: 2,
-        video_profile: MMAL_VIDEO_PROFILE_H264_HIGH,
-        video_level: MMAL_VIDEO_LEVEL_H264_4,
+        video_profile: MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH,
+        video_level: MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_4,
         ..Default::default()
     });
     camera.activate().unwrap();

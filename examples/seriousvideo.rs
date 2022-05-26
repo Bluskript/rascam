@@ -1,3 +1,6 @@
+use mmal_sys::{
+    MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_4, MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH,
+};
 use rascam::*;
 use std::fs::File;
 use std::io::Write;
@@ -32,8 +35,8 @@ fn serious_video(info: &CameraInfo) {
         zero_copy: false,
         use_encoder: true,
         framerate: 30,
-        video_profile: MMAL_VIDEO_PROFILE_H264_HIGH,
-        video_level: MMAL_VIDEO_LEVEL_H264_4,
+        video_profile: MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH,
+        video_level: MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_4,
     };
     camera
         .set_camera_params(info, false, settings.framerate)

@@ -175,6 +175,8 @@ pub struct SeriousCamera {
     use_encoder: bool,
 }
 
+unsafe impl Send for SeriousCamera {}
+
 impl SeriousCamera {
     pub fn new() -> Result<SeriousCamera, CameraError> {
         init();
@@ -709,11 +711,9 @@ impl SeriousCamera {
             // https://github.com/waveform80/picamera/issues/22
             // and the commit message that closed issue #22
             let mut preview_ptr = MaybeUninit::uninit();
-            let name: &[i8; ffi::MMAL_COMPONENT_NULL_SINK.len()] = std::mem::transmute(ffi::MMAL_COMPONENT_NULL_SINK);
-            let status = ffi::mmal_component_create(
-                name.as_ptr(),
-                preview_ptr.as_mut_ptr(),
-            );
+            let name: &[i8; ffi::MMAL_COMPONENT_NULL_SINK.len()] =
+                std::mem::transmute(ffi::MMAL_COMPONENT_NULL_SINK);
+            let status = ffi::mmal_component_create(name.as_ptr(), preview_ptr.as_mut_ptr());
 
             match status {
                 MMAL_STATUS_T::MMAL_SUCCESS => {
@@ -1254,11 +1254,9 @@ impl SimpleCamera {
     pub async fn take_one_async(&mut self) -> Result<Vec<u8>, CameraError> {
         let receiver = self.serious.take_async()?;
         let future = receiver
-            .fold(Vec::new(), |mut acc, buf| {
-                async move {
-                    acc.extend(buf.get_bytes());
-                    acc
-                }
+            .fold(Vec::new(), |mut acc, buf| async move {
+                acc.extend(buf.get_bytes());
+                acc
             })
             .map(Ok);
 

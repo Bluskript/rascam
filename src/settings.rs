@@ -1,5 +1,5 @@
 use mmal_sys as ffi;
-
+use serde::{Deserialize, Serialize};
 use std::os::raw::c_uint;
 
 pub type ISO = u32;
@@ -37,7 +37,8 @@ pub const ISO_3200: ISO = 3200;
 /// };
 /// camera.configure(settings);
 /// ```
-#[derive(Debug)]
+#[derive(Clone, Copy, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct CameraSettings {
     pub encoding: c_uint,
     pub width: u32,  // 0 = max

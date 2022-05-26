@@ -7,9 +7,9 @@ repository = "https://github.com/pedrosland/rascam"
 documentation = "https://pedrosland.github.io/rascam/"
 readme = "README.md"
 license = "MIT"
-categories = [ "hardware-support" ]
-keywords = [ "camera", "raspberry", "pi", "rpi" ]
-exclude = [ "ci/*" ]
+categories = ["hardware-support"]
+keywords = ["camera", "raspberry", "pi", "rpi"]
+exclude = ["ci/*"]
 build = "build.rs"
 edition = "2018"
 
@@ -19,6 +19,7 @@ libc = "0.2"
 parking_lot = "0.10"
 scopeguard = "1.0"
 futures = "0.3"
+serde = { version = "^1.0", optional = true, features = ["derive"] }
 
 [dev-dependencies]
 tokio = { version = "0.2", features = ["full"] }
@@ -28,6 +29,7 @@ default = []
 
 # Enable this feature to enable some print statements for debugging.
 debug = []
+serde = ["dep:serde"]
 
 [package.metadata.docs.rs]
 default-target = "armv7-unknown-linux-gnueabihf"

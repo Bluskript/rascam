@@ -1,5 +1,6 @@
 use ffi::MMAL_STATUS_T;
 use mmal_sys as ffi;
+use serde::{Deserialize, Serialize};
 use std::ffi::CStr;
 use std::fmt;
 use std::mem;
@@ -33,7 +34,8 @@ impl fmt::Display for Info {
 /// Information about an attached camera. Created by the [`info`] function.
 ///
 /// [`info`]: info()
-#[derive(Clone, Debug)]
+#[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct CameraInfo {
     pub port_id: u32,
     pub max_width: u32,

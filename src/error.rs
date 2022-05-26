@@ -29,6 +29,8 @@ impl MmalError {
     }
 }
 
+unsafe impl Send for MmalError {}
+
 #[test]
 fn test_camera_error_status() {
     let mut err = MmalError {
@@ -136,15 +138,6 @@ impl fmt::Display for CameraError {
 }
 
 impl error::Error for CameraError {
-    fn description(&self) -> &str {
-        match *(self.kind()) {
-            ErrorKind::Mmal(ref err) => err.description(),
-            ErrorKind::Recv(ref err) => err.description(),
-            ErrorKind::Io(ref err) => err.description(),
-            _ => unreachable!(),
-        }
-    }
-
     fn cause(&self) -> Option<&dyn error::Error> {
         match *(self.kind()) {
             ErrorKind::Mmal(ref err) => Some(err),
